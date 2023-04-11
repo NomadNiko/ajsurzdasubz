@@ -56,33 +56,6 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\SDKPackage\AppCenterSDKPackage.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\AppCenterEditorGuiFieldHelper.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\JsonWrapper.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\ISerializer.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\AppCenterEditor.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\AppCenterEditorHttp.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\SimpleJson.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\AppCenterEditorMenu.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\AppCenterEditorHeader.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\SDKPackage\AppCenterCrashesPackage.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\AppCenterEditorHelper.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\IEdExLogger.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\SimpleJsonInstance.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\AppCenterEditorPrefsSO.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\LocalLogger.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\PackagesInstaller.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\AppCenterEditorSDKTools.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\SDKPackage\AppCenterAnalyticsPackage.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Components\DrawUtils.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Components\ProgressBar.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Panels\SDKPackage\AppCenterDistributePackage.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\AppCenterEditorVersion.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\AppCenterEditorSDK\Constants.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\Coroutiner.cs" />
-    <Compile Include="Assets\AppCenterEditorExtensions\Editor\Scripts\Utils\EdExLoggerFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.22f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
