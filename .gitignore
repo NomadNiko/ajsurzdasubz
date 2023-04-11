@@ -1,0 +1,15 @@
+# Exclude the Library folder
+Library/
+
+# Exclude the Temp folder
+Temp/
+
+ios/
+
+Android/
+
+Web GL Builds/
+
+# Exclude user-specific files
+*.sln
+*.userprefs

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="SnubwaySmurfers">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebGL Builds.zip!/" />
+      <root url="jar://$PROJECT_DIR$/connectwebgl.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
