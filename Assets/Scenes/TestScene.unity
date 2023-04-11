@@ -202,11 +202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff37a828182f1c4f8ad3831c7daf471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  moveDuration: 0.3
-  rotateSpeed: 20
-  gameMan: {fileID: 0}
-  pixelDistToDetect: 20
 --- !u!1 &183003895
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,11 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff37a828182f1c4f8ad3831c7daf471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  moveDuration: 0.3
-  rotateSpeed: 20
-  gameMan: {fileID: 0}
-  pixelDistToDetect: 20
 --- !u!1001 &349190096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1156,7 +1146,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.63
+  m_Intensity: 1.48
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1700,8 +1690,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff37a828182f1c4f8ad3831c7daf471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  moveDuration: 0.3
-  rotateSpeed: 20
-  gameMan: {fileID: 0}
-  pixelDistToDetect: 20

@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PlayerSelector : MonoBehaviour
 {
-    private float scaleMultiplier = 1.7f; // This determines how much to scale the objects.
-    public float moveSpeed = 15f;
-    public float moveDuration = 0.3f;
-    public float rotateSpeed = 20f;
-    private bool isMoving = false;
+    // Float variables
     private Vector3 targetPosition;
-    private Animator animator;
-    public gameManager gameMan;
     private Vector2 startPos;
-    public int pixelDistToDetect = 20;
-    private bool fingerDown;
-    private bool isScaledUp = false;
     private Vector3 originalSize;
+    private Animator animator;
+    private gameManager gameMan;
+    private bool isfingerDown;
+    private bool isMoving = false;
+    private bool isMiddle = false;
+    private bool isScaledUp = false;
+    private bool isScaling = false; // Whether the object is currently scaling up or down
+    private float scaleMultiplier = 1.5f; // This determines how much to scale the objects.
+    private float moveSpeed = 5f;
+    private float moveDuration = 1f;
+    private float rotateSpeed = 40f;
+    private float scaleDuration = 1f; // The duration over which to interpolate the scale
+    private float scaleTimer = 0.0f; // The current scale interpolation timer
+    private int pixelDistToDetect = 20;
+
 
     private void Start()
     {
@@ -42,12 +48,12 @@ public class PlayerSelector : MonoBehaviour
     }
     void ControlPlayer()
     {
-        if (!fingerDown && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        if (!isfingerDown && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             // If so, we're going to set the startPos to the first touch's position, 
             startPos = Input.touches[0].position;
             // ... and set fingerDown to true to start checking the direction of the swipe.
-            fingerDown = true;
+            isfingerDown = true;
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) && !isMoving && transform.position.x > -6)
         {
@@ -55,9 +61,9 @@ public class PlayerSelector : MonoBehaviour
             targetPosition = transform.position + new Vector3(-1f, 0f, 0f);
             StartCoroutine(MovePlayer(targetPosition));
         }
-        else if (fingerDown && Input.touches[0].position.x <= startPos.x - pixelDistToDetect && !isMoving && transform.position.x > -6)
+        else if (isfingerDown && Input.touches[0].position.x <= startPos.x - pixelDistToDetect && !isMoving && transform.position.x > -6)
         {
-            fingerDown = false;
+            isfingerDown = false;
             targetPosition = transform.position + new Vector3(-1f, 0f, 0f);
             StartCoroutine(MovePlayer(targetPosition));
         }
@@ -67,9 +73,9 @@ public class PlayerSelector : MonoBehaviour
             targetPosition = transform.position + new Vector3(1f, 0f, 0f);
             StartCoroutine(MovePlayer(targetPosition));
         }
-        else if (fingerDown && Input.touches[0].position.x >= startPos.x + pixelDistToDetect && !isMoving && transform.position.x < 6)
+        else if (isfingerDown && Input.touches[0].position.x >= startPos.x + pixelDistToDetect && !isMoving && transform.position.x < 6)
         {
-            fingerDown = false;
+            isfingerDown = false;
             targetPosition = transform.position + new Vector3(1f, 0f, 0f);
             StartCoroutine(MovePlayer(targetPosition));
         }
@@ -94,23 +100,75 @@ public class PlayerSelector : MonoBehaviour
         }
 
         transform.position = targetPosition;
-        transform.rotation = startingRotation;
+
+        // Gradually rotate the player back to its starting rotation over a period of time.
+        float rotationDuration = 0.25f; // Adjust this to control the duration of the rotation animation.
+        elapsedTime = 0f;
+        Quaternion finalRotation = startingRotation;
+
+        while (elapsedTime < rotationDuration)
+        {
+            float t = elapsedTime / rotationDuration;
+            transform.rotation = Quaternion.Lerp(targetRotation, finalRotation, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = finalRotation;
         isMoving = false;
     }
     void AdjustSize()
     {
         // Check if the child's position has an x-coordinate of 0.
-        if (transform.position.x == 0 && !isScaledUp)
+        if (transform.position.x == 0 && !isMiddle)
         {
-            // Increase the child's scale by the scaleMultiplier.
-            transform.localScale *= scaleMultiplier;
-            isScaledUp = true;
+            // Set the flag to true to indicate that the child is in the middle section.
+            isMiddle = true;
+
+            // Gradually increase the child's scale by the scaleMultiplier over a period of time.
+            StartCoroutine(GrowOverTime());
         }
-        if (transform.position.x != 0)
+        else if (transform.position.x != 0 && isMiddle)
         {
-            transform.localScale = originalSize;
-            isScaledUp = false;
+            // Set the flag to false to indicate that the child is no longer in the middle section.
+            isMiddle = false;
+
+            // Gradually decrease the child's scale back to its original size over a period of time.
+            StartCoroutine(ShrinkOverTime());
+        }
+    }
+
+    IEnumerator GrowOverTime()
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * scaleMultiplier;
+        float duration = 0.5f; // Adjust this to control the duration of the growth animation.
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
+        transform.localScale = targetScale; // Ensure that the scale is set to the target value exactly.
+    }
+
+    IEnumerator ShrinkOverTime()
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalSize;
+        float duration = 0.5f; // Adjust this to control the duration of the shrinking animation.
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale; // Ensure that the scale is set to the target value exactly.
     }
 }
